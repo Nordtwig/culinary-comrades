@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgby0f8kb1lxr"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_x4r7g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ph4ut"]
+radius = 0.4
+height = 1.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrfgb"]
+albedo_color = Color(0, 0.475213, 0.862123, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nmlai"]
+material = SubResource("StandardMaterial3D_xrfgb")
+radius = 0.4
+height = 1.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_fdqpw"]
+material = SubResource("StandardMaterial3D_xrfgb")
+size = Vector3(0.2, 0.2, 1)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_x4r7g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ph4ut")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.996983, 0.0776239, 0, -0.0776239, 0.996983, 0, 0.536455, -0.472158)
+fov = 90.0
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("CapsuleMesh_nmlai")
+skeleton = NodePath("../..")
+
+[node name="RightArmMesh" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273919, 0.238996, -0.404585)
+mesh = SubResource("BoxMesh_fdqpw")
+
+[node name="LeftArmMesh" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.274, 0.239, -0.404835)
+mesh = SubResource("BoxMesh_fdqpw")
