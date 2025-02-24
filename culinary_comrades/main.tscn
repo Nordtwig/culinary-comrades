@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ggvuiwn2wt74"]
+[gd_scene load_steps=12 format=3 uid="uid://ggvuiwn2wt74"]
 
 [ext_resource type="PackedScene" uid="uid://cgby0f8kb1lxr" path="res://Player/player.tscn" id="1_dobdw"]
+[ext_resource type="PackedScene" uid="uid://dy0f8n3amwem2" path="res://Placeable/placeable_stove.tscn" id="2_x2y8p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t1kcg"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,7 +17,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvtbp"]
-albedo_color = Color(0.201527, 0.201527, 0.201527, 1)
+albedo_color = Color(0.43134, 0.43134, 0.43134, 1)
 metallic_specular = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pprar"]
@@ -25,6 +26,16 @@ size = Vector2(20, 20)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_luyo2"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gncwk"]
+albedo_color = Color(0.607109, 0.265444, 0.214106, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gvwsy"]
+material = SubResource("StandardMaterial3D_gncwk")
+size = Vector3(1, 3, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gfnru"]
+data = PackedVector3Array(-0.5, 1.5, 0.5, 0.5, 1.5, 0.5, -0.5, -1.5, 0.5, 0.5, 1.5, 0.5, 0.5, -1.5, 0.5, -0.5, -1.5, 0.5, 0.5, 1.5, -0.5, -0.5, 1.5, -0.5, 0.5, -1.5, -0.5, -0.5, 1.5, -0.5, -0.5, -1.5, -0.5, 0.5, -1.5, -0.5, 0.5, 1.5, 0.5, 0.5, 1.5, -0.5, 0.5, -1.5, 0.5, 0.5, 1.5, -0.5, 0.5, -1.5, -0.5, 0.5, -1.5, 0.5, -0.5, 1.5, -0.5, -0.5, 1.5, 0.5, -0.5, -1.5, -0.5, -0.5, 1.5, 0.5, -0.5, -1.5, 0.5, -0.5, -1.5, -0.5, 0.5, 1.5, 0.5, -0.5, 1.5, 0.5, 0.5, 1.5, -0.5, -0.5, 1.5, 0.5, -0.5, 1.5, -0.5, 0.5, 1.5, -0.5, -0.5, -1.5, 0.5, 0.5, -1.5, 0.5, -0.5, -1.5, -0.5, 0.5, -1.5, 0.5, 0.5, -1.5, -0.5, -0.5, -1.5, -0.5)
 
 [node name="Main" type="Node3D"]
 
@@ -48,3 +59,943 @@ shape = SubResource("ConcavePolygonShape3D_luyo2")
 
 [node name="Player" parent="." instance=ExtResource("1_dobdw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.871606, 0)
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="WallNorth" type="Node3D" parent="Walls"]
+
+[node name="WallSegment" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment2" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment3" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment4" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment5" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment6" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment7" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment8" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment9" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment10" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment11" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment12" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment13" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment14" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment15" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment16" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment17" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment18" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment19" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment20" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment21" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment22" type="StaticBody3D" parent="Walls/WallNorth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallNorth/WallSegment22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallNorth/WallSegment22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallWest" type="Node3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="WallSegment2" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment3" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment4" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment5" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment6" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment7" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment8" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment9" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment10" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment11" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment12" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment13" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment14" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment15" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment16" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment17" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment18" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment19" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment20" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment21" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment22" type="StaticBody3D" parent="Walls/WallWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallWest/WallSegment22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallWest/WallSegment22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSouth" type="Node3D" parent="Walls"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="WallSegment2" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment3" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment4" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment5" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment6" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment7" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment8" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment9" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment10" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment11" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment12" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment13" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment14" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment15" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment16" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment17" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment18" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment19" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment20" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment21" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment22" type="StaticBody3D" parent="Walls/WallSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallSouth/WallSegment22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallSouth/WallSegment22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallEast" type="Node3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="WallSegment2" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment3" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment4" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment5" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment6" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment7" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment8" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment9" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment10" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment11" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment12" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment13" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment14" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment15" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment16" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment17" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment18" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment19" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment20" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="WallSegment21" type="StaticBody3D" parent="Walls/WallEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/WallEast/WallSegment21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+mesh = SubResource("BoxMesh_gvwsy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/WallEast/WallSegment21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+shape = SubResource("ConcavePolygonShape3D_gfnru")
+
+[node name="PlaceableStove" parent="." instance=ExtResource("2_x2y8p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)

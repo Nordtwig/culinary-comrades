@@ -26,20 +26,22 @@ script = ExtResource("1_x4r7g")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ph4ut")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.996983, 0.0776239, 0, -0.0776239, 0.996983, 0, 0.536455, -0.472158)
-fov = 90.0
-
 [node name="Body" type="Node3D" parent="."]
 
 [node name="BodyMesh" type="MeshInstance3D" parent="Body"]
 mesh = SubResource("CapsuleMesh_nmlai")
 skeleton = NodePath("../..")
 
-[node name="RightArmMesh" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273919, 0.238996, -0.404585)
-mesh = SubResource("BoxMesh_fdqpw")
+[node name="Camera3D" type="Camera3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.996983, 0.0776239, 0, -0.0776239, 0.996983, 0, 0.536455, -0.50762)
+fov = 90.0
 
-[node name="LeftArmMesh" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.274, 0.239, -0.404835)
+[node name="RightArmMesh" type="MeshInstance3D" parent="Body/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.996983, -0.0776239, 0, 0.0776239, 0.996983, 0.273919, -0.308444, 0.129521)
 mesh = SubResource("BoxMesh_fdqpw")
+skeleton = NodePath("../..")
+
+[node name="LeftArmMesh" type="MeshInstance3D" parent="Body/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.996983, -0.0776239, 0, 0.0776239, 0.996983, -0.274, -0.30842, 0.129273)
+mesh = SubResource("BoxMesh_fdqpw")
+skeleton = NodePath("../..")
