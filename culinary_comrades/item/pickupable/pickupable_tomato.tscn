@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqcmhodi2r7c1"]
+
+[ext_resource type="PackedScene" uid="uid://uytl8x5p874f" path="res://item/pickupable/pickupable.tscn" id="1_0xx1m"]
+[ext_resource type="Resource" uid="uid://dahehv7ptaaex" path="res://resources/items/tomato_item_data.tres" id="2_vu4x6"]
+[ext_resource type="PackedScene" uid="uid://b0lak4twvkhw0" path="res://item/model/tomato_item_model.tscn" id="3_2lhwg"]
+
+[node name="PickupableTomato" instance=ExtResource("1_0xx1m")]
+collision_mask = 2
+item_data = ExtResource("2_vu4x6")
+
+[node name="TomatoItemModel" parent="." index="0" instance=ExtResource("3_2lhwg")]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://uytl8x5p874f"]
+
+[ext_resource type="Script" path="res://item/pickupable/pickupable.gd" id="1_kkc7p"]
+
+[node name="Pickupable" type="StaticBody3D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_kkc7p")

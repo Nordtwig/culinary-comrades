@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://ggvuiwn2wt74"]
+[gd_scene load_steps=13 format=3 uid="uid://ggvuiwn2wt74"]
 
-[ext_resource type="PackedScene" uid="uid://cgby0f8kb1lxr" path="res://Player/player.tscn" id="1_dobdw"]
-[ext_resource type="PackedScene" uid="uid://dy0f8n3amwem2" path="res://Placeable/placeable_stove.tscn" id="2_x2y8p"]
+[ext_resource type="PackedScene" uid="uid://cgby0f8kb1lxr" path="res://player/player.tscn" id="1_dobdw"]
+[ext_resource type="PackedScene" uid="uid://dy0f8n3amwem2" path="res://placeable/placeable_stove.tscn" id="2_x2y8p"]
+[ext_resource type="PackedScene" uid="uid://cqcmhodi2r7c1" path="res://item/pickupable/pickupable_tomato.tscn" id="3_e3bih"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t1kcg"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -999,3 +1000,10 @@ shape = SubResource("ConcavePolygonShape3D_gfnru")
 
 [node name="PlaceableStove" parent="." instance=ExtResource("2_x2y8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+collision_layer = 1
+collision_mask = 1
+
+[node name="PickupableTomato" parent="." instance=ExtResource("3_e3bih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.715869, 1.20732, -4.26171)
+collision_layer = 1
+collision_mask = 1

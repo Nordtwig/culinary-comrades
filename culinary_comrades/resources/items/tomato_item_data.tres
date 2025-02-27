@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dahehv7ptaaex"]
+
+[ext_resource type="PackedScene" uid="uid://bbbnflajm3bil" path="res://item/model/placeholder_item_model.tscn" id="1_42a4i"]
+[ext_resource type="Script" path="res://resources/item_data.gd" id="2_fjg88"]
+
+[resource]
+script = ExtResource("2_fjg88")
+name = "tomato"
+description = "Fresh, plump, bursting with crimson potential."
+model_scene = ExtResource("1_42a4i")

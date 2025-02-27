@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbbnflajm3bil"]
+
+[ext_resource type="PackedScene" uid="uid://c0ekr6xqhqe13" path="res://item/model/item_model.tscn" id="1_kmkje"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3honp"]
+data = PackedVector3Array(-0.1, 0.1, 0.1, 0.1, 0.1, 0.1, -0.1, -0.1, 0.1, 0.1, 0.1, 0.1, 0.1, -0.1, 0.1, -0.1, -0.1, 0.1, 0.1, 0.1, -0.1, -0.1, 0.1, -0.1, 0.1, -0.1, -0.1, -0.1, 0.1, -0.1, -0.1, -0.1, -0.1, 0.1, -0.1, -0.1, 0.1, 0.1, 0.1, 0.1, 0.1, -0.1, 0.1, -0.1, 0.1, 0.1, 0.1, -0.1, 0.1, -0.1, -0.1, 0.1, -0.1, 0.1, -0.1, 0.1, -0.1, -0.1, 0.1, 0.1, -0.1, -0.1, -0.1, -0.1, 0.1, 0.1, -0.1, -0.1, 0.1, -0.1, -0.1, -0.1, 0.1, 0.1, 0.1, -0.1, 0.1, 0.1, 0.1, 0.1, -0.1, -0.1, 0.1, 0.1, -0.1, 0.1, -0.1, 0.1, 0.1, -0.1, -0.1, -0.1, 0.1, 0.1, -0.1, 0.1, -0.1, -0.1, -0.1, 0.1, -0.1, 0.1, 0.1, -0.1, -0.1, -0.1, -0.1, -0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d77de"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="PlaceholderItemModel" instance=ExtResource("1_kmkje")]
+shape = SubResource("ConcavePolygonShape3D_3honp")
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("BoxMesh_d77de")
+
+[node name="BottomMarker" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)

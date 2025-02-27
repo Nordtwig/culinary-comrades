@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0lak4twvkhw0"]
+
+[ext_resource type="PackedScene" uid="uid://c0ekr6xqhqe13" path="res://item/model/item_model.tscn" id="1_6cri3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0d5ia"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e160q"]
+albedo_color = Color(0.832975, 0.0732739, 0, 1)
+metallic_specular = 1.0
+roughness = 0.7
+
+[sub_resource type="SphereMesh" id="SphereMesh_21vhh"]
+material = SubResource("StandardMaterial3D_e160q")
+radius = 0.1
+height = 0.2
+
+[node name="TomatoItemModel" instance=ExtResource("1_6cri3")]
+shape = SubResource("SphereShape3D_0d5ia")
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("SphereMesh_21vhh")
+
+[node name="BottomMarker" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0947607, 0)

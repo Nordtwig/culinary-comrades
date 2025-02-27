@@ -12,10 +12,16 @@ var is_sprinting: bool = false
 var is_grounded: bool = false
 
 @onready var camera: Camera3D = $Body/Camera3D
+@onready var interact_cast: RayCast3D = %InteractCast
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	print(PI/2)
+
+
+func _process(delta: float) -> void:
+	print(interact_cast.get_collider())
 
 
 func _physics_process(delta: float) -> void:
