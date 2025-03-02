@@ -5,7 +5,6 @@ extends StaticBody3D
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
-	add_child(item_data.model_scene.instantiate())
 
 
 func _on_mouse_entered() -> void:
